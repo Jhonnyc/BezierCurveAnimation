@@ -35,7 +35,7 @@
             android:id="@+id/plane_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/plane"
+            android:src="@mipmap/plane"
             android:visibility="invisible" />
     </RelativeLayout>
 

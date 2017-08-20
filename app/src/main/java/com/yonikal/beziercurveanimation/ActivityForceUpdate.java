@@ -155,7 +155,7 @@ public class ActivityForceUpdate extends Activity {
         public AnimatedPlaneView(final ViewGroup parentView, PathWithVariables path) {
             last = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
             iv = new ImageView(parentView.getContext());
-            iv.setImageResource(R.drawable.plane);
+            iv.setImageResource(R.mipmap.plane);
 
             RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
