@@ -20,12 +20,6 @@
             </intent-filter>
         </activity>
 
-        <!--<activity
-            android:name=".ActivityForceUpdate"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-        </activity>-->
-
     </application>
 
 </manifest>
