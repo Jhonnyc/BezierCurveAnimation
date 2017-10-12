@@ -2,4 +2,4 @@
 - Add Builder
 - Java doc
 - Add as a dependency for the sample app
-- Create this as a jitpack dependency
+- Convert into a jitpack repository 
