@@ -1,5 +1,0 @@
-- Pack everything in one class
-- Add Builder
-- Java doc
-- Add as a dependency for the sample app
-- Convert into a jitpack repository 
