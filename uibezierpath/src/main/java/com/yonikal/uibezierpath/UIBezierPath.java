@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.os.Handler;
 import android.view.View;
@@ -19,7 +18,6 @@ import java.util.Random;
 /**
  * Created by yoni on 22/10/2017.
  */
-
 public class UIBezierPath {
 
     private final int MIN_PLANES_ON_SCREEN = 1;
@@ -31,7 +29,6 @@ public class UIBezierPath {
     private static final int TIME_INTERVAL = 800;
     private static final int[] COLORS = new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
-    private Path mPath;
     private ViewGroup mContainer;
     private ImageView mImageView;
     private int mImage;
@@ -46,26 +43,26 @@ public class UIBezierPath {
     };
 
     public UIBezierPath(ViewGroup container, ImageView imageView, int image) {
-        mPath = new Path();
+        mContainer = container;
         mHandler = new Handler();
         mImageView = imageView;
         mImage = image;
     }
 
-    public PathWithVariables getRandomPath() {
+    public DataPath getRandomPath() {
 
         float width = mContainer.getWidth();
         float x1 = width / 3;
         float x2 = x1 * 2;
         float singleImageWidth = 2 * mImageView.getWidth();
 
-        final Path path = new Path();
-        PathWithVariables randomPath = new PathWithVariables();
-        randomPath.path = path;
-        randomPath.startX = 0 - singleImageWidth;
-        randomPath.startY = getRandomEdgeHeight();
-        path.moveTo(randomPath.startX, randomPath.startY);
-        path.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageWidth, getRandomEdgeHeight());
+        float startX = 0 - singleImageWidth;
+        float startY = getRandomEdgeHeight();
+        DataPath randomPath = new DataPath(startX, startY);
+
+
+        randomPath.moveTo(randomPath.getStartX(), randomPath.getStartY());
+        randomPath.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageWidth, getRandomEdgeHeight());
 
         return randomPath;
     }
@@ -94,19 +91,13 @@ public class UIBezierPath {
         }
     }
 
-    public static class PathWithVariables {
-        Path path;
-        float startX;
-        float startY;
-    }
-
     public static class AnimatedPlaneView {
 
         float[] last;
         ImageView iv;
         ValueAnimator pathAnimator;
 
-        public AnimatedPlaneView(final ViewGroup parentView, PathWithVariables path, int imageview) {
+        public AnimatedPlaneView(final ViewGroup parentView, DataPath path, int imageview) {
             last = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
             iv = new ImageView(parentView.getContext());
             iv.setImageResource(imageview);
@@ -114,14 +105,14 @@ public class UIBezierPath {
             RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
             iv.setLayoutParams(rlParams);
-            iv.setX(path.startX);
-            iv.setY(path.startY);
+            iv.setX(path.getStartX());
+            iv.setY(path.getStartY());
             int color = COLORS[new Random().nextInt(COLORS.length)];
             iv.setColorFilter(color);
 
             parentView.addView(iv);
 
-            final PathMeasure pm = new PathMeasure(path.path, false);
+            final PathMeasure pm = new PathMeasure(path, false);
 
             pathAnimator = ValueAnimator.ofFloat(0.0f, pm.getLength());
             pathAnimator.setDuration(new Random().nextInt(MAX_ANIMATION_TIME - MIN_ANIMATION_TIME) + MIN_ANIMATION_TIME);
