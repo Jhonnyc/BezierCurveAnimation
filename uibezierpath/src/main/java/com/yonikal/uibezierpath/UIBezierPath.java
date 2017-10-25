@@ -94,23 +94,23 @@ public class UIBezierPath {
     public static class AnimatedPlaneView {
 
         float[] last;
-        ImageView iv;
+        ImageView imageView;
         ValueAnimator pathAnimator;
 
         public AnimatedPlaneView(final ViewGroup parentView, DataPath path, int imageview) {
             last = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
-            iv = new ImageView(parentView.getContext());
-            iv.setImageResource(imageview);
+            imageView = new ImageView(parentView.getContext());
+            imageView.setImageResource(imageview);
 
             RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
-            iv.setLayoutParams(rlParams);
-            iv.setX(path.getStartX());
-            iv.setY(path.getStartY());
+            imageView.setLayoutParams(rlParams);
+            imageView.setX(path.getStartX());
+            imageView.setY(path.getStartY());
             int color = COLORS[new Random().nextInt(COLORS.length)];
-            iv.setColorFilter(color);
+            imageView.setColorFilter(color);
 
-            parentView.addView(iv);
+            parentView.addView(imageView);
 
             final PathMeasure pm = new PathMeasure(path, false);
 
@@ -126,12 +126,12 @@ public class UIBezierPath {
                         distance = pm.getLength() * val;
                     }
                     float[] tan = new float[2];
-                    iv.setX(last[0]);
-                    iv.setY(last[1]);
+                    imageView.setX(last[0]);
+                    imageView.setY(last[1]);
 
                     pm.getPosTan(distance, last, tan);
                     float deg = (float) (Math.atan2(tan[1], tan[0]) * 180.0 / Math.PI);
-                    iv.setRotation(deg);
+                    imageView.setRotation(deg);
                 }
             });
             pathAnimator.addListener(new AnimatorListenerAdapter() {
@@ -139,16 +139,16 @@ public class UIBezierPath {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     super.onAnimationStart(animation);
-                    iv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                    imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    iv.setVisibility(View.GONE);
-                    iv.setLayerType(View.LAYER_TYPE_NONE, null);
-                    iv.setDrawingCacheEnabled(false);
-                    parentView.removeView(iv);
+                    imageView.setVisibility(View.GONE);
+                    imageView.setLayerType(View.LAYER_TYPE_NONE, null);
+                    imageView.setDrawingCacheEnabled(false);
+                    parentView.removeView(imageView);
                 }
 
             });
