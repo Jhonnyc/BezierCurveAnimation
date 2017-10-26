@@ -60,9 +60,9 @@ public class UIBezierPath {
         float startY = getRandomEdgeHeight();
         DataPath randomPath = new DataPath(startX, startY);
 
-
         randomPath.moveTo(randomPath.getStartX(), randomPath.getStartY());
-        randomPath.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageWidth, getRandomEdgeHeight());
+        randomPath.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageWidth,
+                getRandomEdgeHeight());
 
         return randomPath;
     }
