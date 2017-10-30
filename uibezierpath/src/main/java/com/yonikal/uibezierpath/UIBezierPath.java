@@ -91,7 +91,7 @@ public class UIBezierPath {
         }
     }
 
-    public static class AnimatedPlaneView {
+    private static class AnimatedPlaneView {
 
         float[] last;
         ImageView imageView;
