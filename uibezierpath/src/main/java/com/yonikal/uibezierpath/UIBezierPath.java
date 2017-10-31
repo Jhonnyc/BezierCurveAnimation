@@ -49,7 +49,7 @@ public class UIBezierPath {
         mImage = image;
     }
 
-    public DataPath getRandomPath() {
+    private DataPath getRandomPath() {
 
         float width = mContainer.getWidth();
         float x1 = width / 3;
@@ -67,14 +67,14 @@ public class UIBezierPath {
         return randomPath;
     }
 
-    public float getRandomHeight() {
+    private float getRandomHeight() {
         float low = mContainer.getTop();
         float high = mContainer.getBottom();
         int d = (int) (high - low);
         return new Random().nextInt(d);
     }
 
-    public float getRandomEdgeHeight() {
+    private float getRandomEdgeHeight() {
         float height = mContainer.getHeight() / 2;
         return height + (new Random().nextInt(MAX_EDGE_DELTA - MIN_EDGE_DELTA) + MIN_EDGE_DELTA);
     }
@@ -89,6 +89,10 @@ public class UIBezierPath {
         for (AnimatedPlaneView plane : planes) {
             plane.startAnimtion();
         }
+    }
+
+    public void start() {
+
     }
 
     private static class AnimatedPlaneView {
