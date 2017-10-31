@@ -3,6 +3,7 @@ package com.yonikal.beziercurveanimation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -23,8 +24,16 @@ public class ActivityTest extends Activity {
         setContentView(R.layout.activity_test);
         mContainer = (RelativeLayout) findViewById(R.id.container);
         mPlaneImageView = (ImageView) findViewById(R.id.plane_iv);
-        mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
-        mBezierPath.start();
+
+        mContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
+                mBezierPath.start();
+            }
+        });
+
     }
 
     @Override
