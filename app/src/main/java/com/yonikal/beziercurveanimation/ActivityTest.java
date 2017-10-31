@@ -24,6 +24,7 @@ public class ActivityTest extends Activity {
         mContainer = (RelativeLayout) findViewById(R.id.container);
         mPlaneImageView = (ImageView) findViewById(R.id.plane_iv);
         mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
+        mBezierPath.start();
     }
 
     @Override
