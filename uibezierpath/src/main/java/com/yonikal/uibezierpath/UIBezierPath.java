@@ -92,7 +92,7 @@ public class UIBezierPath {
     }
 
     public void start() {
-
+        createAnimation();
     }
 
     private static class AnimatedPlaneView {
