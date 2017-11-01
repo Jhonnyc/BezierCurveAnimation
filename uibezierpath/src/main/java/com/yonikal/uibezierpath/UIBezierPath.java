@@ -91,7 +91,7 @@ public class UIBezierPath {
         }
     }
 
-    public void start() {
+    public void startAnimation() {
         createAnimation();
     }
 

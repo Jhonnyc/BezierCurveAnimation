@@ -32,7 +32,7 @@ public class ActivityTest extends Activity {
                 mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
 
                 // Starting the animation
-                mBezierPath.start();
+                mBezierPath.startAnimation();
             }
         });
 
