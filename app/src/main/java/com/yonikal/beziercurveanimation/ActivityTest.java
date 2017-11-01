@@ -30,6 +30,8 @@ public class ActivityTest extends Activity {
             public void onGlobalLayout() {
                 mContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
+
+                // Starting the animation
                 mBezierPath.start();
             }
         });
