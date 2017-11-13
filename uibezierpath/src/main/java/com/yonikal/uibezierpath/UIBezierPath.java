@@ -34,7 +34,6 @@ public class UIBezierPath {
     private static final int TIME_INTERVAL = 800;
     private static final int[] COLORS = new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
-    private OnSetup mOnSetup;
     private ViewGroup mContainer;
     private ImageView mImageView;
     private int mImage;
@@ -57,7 +56,9 @@ public class UIBezierPath {
                 mHandler = new Handler();
                 mImageView = imageView;
                 mImage = image;
-                mOnSetup = onSetup;
+                if(onSetup != null) {
+                    onSetup.onSetupDone();
+                }
             }
         });
     }
