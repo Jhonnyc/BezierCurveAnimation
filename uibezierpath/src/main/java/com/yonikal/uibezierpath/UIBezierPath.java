@@ -8,6 +8,7 @@ import android.graphics.PathMeasure;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,6 +21,10 @@ import java.util.Random;
  */
 public class UIBezierPath {
 
+    public static interface OnSetup {
+        void onSetupDone();
+    }
+
     private final int MIN_PLANES_ON_SCREEN = 1;
     private final int MAX_PLANES_ON_SCREEN = 4;
     private final int MIN_EDGE_DELTA = -200;
@@ -29,6 +34,7 @@ public class UIBezierPath {
     private static final int TIME_INTERVAL = 800;
     private static final int[] COLORS = new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
+    private OnSetup mOnSetup;
     private ViewGroup mContainer;
     private ImageView mImageView;
     private int mImage;
@@ -42,15 +48,21 @@ public class UIBezierPath {
         }
     };
 
-    public UIBezierPath(ViewGroup container, ImageView imageView, int image) {
-        mContainer = container;
-        mHandler = new Handler();
-        mImageView = imageView;
-        mImage = image;
+    public UIBezierPath(final ViewGroup container, final ImageView imageView, final int image, final OnSetup onSetup) {
+        container.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mContainer = container;
+                mHandler = new Handler();
+                mImageView = imageView;
+                mImage = image;
+                mOnSetup = onSetup;
+            }
+        });
     }
 
     private DataPath getRandomPath() {
-
         float width = mContainer.getWidth();
         float x1 = width / 3;
         float x2 = x1 * 2;

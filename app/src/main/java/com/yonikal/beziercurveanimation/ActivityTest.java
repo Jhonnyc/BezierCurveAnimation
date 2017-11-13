@@ -24,18 +24,13 @@ public class ActivityTest extends Activity {
         setContentView(R.layout.activity_test);
         mContainer = (RelativeLayout) findViewById(R.id.container);
         mPlaneImageView = (ImageView) findViewById(R.id.plane_iv);
-
-        mContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane, new UIBezierPath.OnSetup() {
             @Override
-            public void onGlobalLayout() {
-                mContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane);
-
+            public void onSetupDone() {
                 // Starting the animation
                 mBezierPath.startAnimation();
             }
         });
-
     }
 
     @Override
