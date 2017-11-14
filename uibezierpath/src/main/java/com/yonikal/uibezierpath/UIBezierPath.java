@@ -24,16 +24,16 @@ public class UIBezierPath {
     private final int MAX_EDGE_DELTA = 200;
     private static final int TIME_INTERVAL = 800;
 
+    private int mImage;
     private ViewGroup mContainer;
     private ImageView mImageView;
-    private int mImage;
     private Handler mHandler;
 
-    private Runnable r = new Runnable() {
+    private Runnable mTask = new Runnable() {
         @Override
         public void run() {
             createAnimation();
-            mHandler.postDelayed(r, TIME_INTERVAL);
+            mHandler.postDelayed(mTask, TIME_INTERVAL);
         }
     };
 
