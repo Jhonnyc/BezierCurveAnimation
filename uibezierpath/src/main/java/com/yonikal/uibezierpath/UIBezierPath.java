@@ -1,6 +1,5 @@
 package com.yonikal.uibezierpath;
 
-import android.graphics.Color;
 import android.os.Handler;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
