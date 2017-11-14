@@ -23,9 +23,9 @@ public class AnimatedPlaneView {
     private static final int[] COLORS = new int[]{Color.RED, Color.YELLOW,
             Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
-    float[] last;
-    ImageView imageView;
-    ValueAnimator pathAnimator;
+    private float[] last;
+    private ImageView imageView;
+    private ValueAnimator pathAnimator;
 
     public AnimatedPlaneView(final ViewGroup parentView, DataPath path, int imageview) {
         last = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
