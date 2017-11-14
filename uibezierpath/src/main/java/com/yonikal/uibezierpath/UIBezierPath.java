@@ -100,7 +100,7 @@ public class UIBezierPath {
         }
 
         for (AnimatedPlaneView plane : planes) {
-            plane.startAnimtion();
+            plane.startAnimation();
         }
     }
 
@@ -171,7 +171,7 @@ public class UIBezierPath {
             });
         }
 
-        public void startAnimtion() {
+        public void startAnimation() {
             pathAnimator.start();
         }
 
