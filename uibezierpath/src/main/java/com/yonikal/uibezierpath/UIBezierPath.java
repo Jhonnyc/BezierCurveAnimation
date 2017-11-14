@@ -14,15 +14,11 @@ import java.util.Random;
  */
 public class UIBezierPath {
 
-    public interface OnSetup {
-        void onSetupDone();
-    }
-
+    private final int TIME_INTERVAL = 800;
+    private final int MAX_EDGE_DELTA = 200;
+    private final int MIN_EDGE_DELTA = -200;
     private final int MIN_PLANES_ON_SCREEN = 1;
     private final int MAX_PLANES_ON_SCREEN = 4;
-    private final int MIN_EDGE_DELTA = -200;
-    private final int MAX_EDGE_DELTA = 200;
-    private static final int TIME_INTERVAL = 800;
 
     private int mImage;
     private ViewGroup mContainer;
