@@ -23,69 +23,70 @@ public class AnimatedPlaneView {
     private static final int[] COLORS = new int[]{Color.RED, Color.YELLOW,
             Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
-    private float[] last;
-    private ImageView imageView;
-    private ValueAnimator pathAnimator;
+    private float[] mLast;
+    private ImageView mImageView;
+    private ValueAnimator mPathAnimator;
 
-    public AnimatedPlaneView(final ViewGroup parentView, DataPath path, int imageview) {
-        last = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
-        imageView = new ImageView(parentView.getContext());
-        imageView.setImageResource(imageview);
+    public AnimatedPlaneView(final ViewGroup parentView, DataPath path, int imageView) {
 
-        RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        imageView.setLayoutParams(rlParams);
-        imageView.setX(path.getStartX());
-        imageView.setY(path.getStartY());
         int color = COLORS[new Random().nextInt(COLORS.length)];
-        imageView.setColorFilter(color);
+        mLast = new float[]{parentView.getX() + parentView.getHeight() / 2, parentView.getWidth() / 2};
+        mImageView = new ImageView(parentView.getContext());
+        mImageView.setImageResource(imageView);
 
-        parentView.addView(imageView);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mImageView.setLayoutParams(params);
+        mImageView.setX(path.getStartX());
+        mImageView.setY(path.getStartY());
+        mImageView.setColorFilter(color);
 
-        final PathMeasure pm = new PathMeasure(path, false);
+        parentView.addView(mImageView);
 
-        pathAnimator = ValueAnimator.ofFloat(0.0f, pm.getLength());
-        pathAnimator.setDuration(new Random().nextInt(MAX_ANIMATION_TIME - MIN_ANIMATION_TIME) + MIN_ANIMATION_TIME);
-        pathAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        final PathMeasure pathMeasure = new PathMeasure(path, false);
+
+        mPathAnimator = ValueAnimator.ofFloat(0.0f, pathMeasure.getLength());
+        mPathAnimator.setDuration(new Random().nextInt(MAX_ANIMATION_TIME - MIN_ANIMATION_TIME) + MIN_ANIMATION_TIME);
+        mPathAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float val = animation.getAnimatedFraction();
 
-                float distance = pm.getLength();
+                float distance = pathMeasure.getLength();
                 if (val != 0) {
-                    distance = pm.getLength() * val;
+                    distance = pathMeasure.getLength() * val;
                 }
                 float[] tan = new float[2];
-                imageView.setX(last[0]);
-                imageView.setY(last[1]);
+                mImageView.setX(mLast[0]);
+                mImageView.setY(mLast[1]);
 
-                pm.getPosTan(distance, last, tan);
-                float deg = (float) (Math.atan2(tan[1], tan[0]) * 180.0 / Math.PI);
-                imageView.setRotation(deg);
+                pathMeasure.getPosTan(distance, mLast, tan);
+                float degree = (float) (Math.atan2(tan[1], tan[0]) * 180.0 / Math.PI);
+                mImageView.setRotation(degree);
             }
         });
-        pathAnimator.addListener(new AnimatorListenerAdapter() {
+
+        mPathAnimator.addListener(new AnimatorListenerAdapter() {
 
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-                imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                mImageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                imageView.setVisibility(View.GONE);
-                imageView.setLayerType(View.LAYER_TYPE_NONE, null);
-                imageView.setDrawingCacheEnabled(false);
-                parentView.removeView(imageView);
+                mImageView.setVisibility(View.GONE);
+                mImageView.setLayerType(View.LAYER_TYPE_NONE, null);
+                mImageView.setDrawingCacheEnabled(false);
+                parentView.removeView(mImageView);
             }
-
         });
     }
 
     public void startAnimation() {
-        pathAnimator.start();
+        mPathAnimator.start();
     }
 
 }
