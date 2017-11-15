@@ -32,9 +32,4 @@ public class ActivityTest extends Activity {
             }
         });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }
