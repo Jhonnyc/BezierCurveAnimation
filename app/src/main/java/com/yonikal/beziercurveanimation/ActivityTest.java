@@ -22,11 +22,12 @@ public class ActivityTest extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        mContainer = (RelativeLayout) findViewById(R.id.container);
-        mPlaneImageView = (ImageView) findViewById(R.id.plane_iv);
+        mContainer = findViewById(R.id.container);
+        mPlaneImageView = findViewById(R.id.plane_iv);
         mBezierPath = new UIBezierPath(mContainer, mPlaneImageView, R.mipmap.plane, new OnSetup() {
             @Override
             public void onSetupDone() {
+
                 // Starting the animation
                 mBezierPath.startAnimation();
             }
