@@ -53,14 +53,14 @@ public class UIBezierPath {
         float width = mContainer.getWidth();
         float x1 = width / 3;
         float x2 = x1 * 2;
-        float singleImageWidth = 2 * mImageView.getWidth();
+        float singleImageDoubleWidth = 2 * mImageView.getWidth();
 
-        float startX = 0 - singleImageWidth;
+        float startX = 0 - singleImageDoubleWidth;
         float startY = getRandomEdgeHeight();
         DataPath randomPath = new DataPath(startX, startY);
 
         randomPath.moveTo(randomPath.getStartX(), randomPath.getStartY());
-        randomPath.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageWidth,
+        randomPath.cubicTo(x1, getRandomHeight(), x2, getRandomHeight(), width + singleImageDoubleWidth,
                 getRandomEdgeHeight());
 
         return randomPath;
