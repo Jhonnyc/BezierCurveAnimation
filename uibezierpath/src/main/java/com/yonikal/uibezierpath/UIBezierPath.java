@@ -54,7 +54,6 @@ public class UIBezierPath {
         float x1 = width / 3;
         float x2 = x1 * 2;
         float singleImageDoubleWidth = 2 * mImageView.getWidth();
-
         float startX = 0 - singleImageDoubleWidth;
         float startY = getRandomEdgeHeight();
         DataPath randomPath = new DataPath(startX, startY);
