@@ -68,8 +68,8 @@ public class UIBezierPath {
     private float getRandomHeight() {
         float low = mContainer.getTop();
         float high = mContainer.getBottom();
-        int d = (int) (high - low);
-        return new Random().nextInt(d);
+        int bound = (int) (high - low);
+        return new Random().nextInt(bound);
     }
 
     private float getRandomEdgeHeight() {
