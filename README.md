@@ -1,2 +1,2 @@
 # BezierCurveAnimation
-A sample code for animating an image along a bezier curve path.
+A sample code for animating an image along a bezier curve path
